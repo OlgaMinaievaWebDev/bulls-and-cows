@@ -1,5 +1,12 @@
 export function evaluateGuess(secret: string, guess: string) {
-  void secret;
-  void guess;
-  return { bulls: 0, cows: 0 };
+  const secretArray = secret.toLowerCase().split('');
+  const guessArray = guess.toLowerCase().split('');
+  const bullsDigits = secretArray.filter(
+    (digit, index) => digit === guessArray[index],
+  );
+  const cowDigits = secretArray.filter(
+    (digit, index) => digit !== guessArray[index] && guessArray.includes(digit),
+  );
+
+  return { bulls: bullsDigits.length, cows: cowDigits.length };
 }
