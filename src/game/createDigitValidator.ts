@@ -1,8 +1,8 @@
 export default function createDigitValidator(base: number) {
-  void base;
+  const digitAlphabet = '0123456789abcdef';
+  const allowedDigits = digitAlphabet.slice(0, base);
 
   return (char: string) => {
-    void char;
-    return false;
+    return char.length === 1 && allowedDigits.includes(char.toLowerCase());
   };
 }
