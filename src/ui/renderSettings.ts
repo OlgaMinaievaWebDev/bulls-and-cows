@@ -44,6 +44,18 @@ export function renderSettings(): HTMLElement {
 
   baseSelect.value = '10';
 
+  baseSelect.addEventListener('change', () => {
+    const base = Number(baseSelect.value);
+
+    Array.from(lengthSelect.options).forEach((option) => {
+      option.disabled = Number(option.value) > base;
+    });
+
+    if (Number(lengthSelect.value) > base) {
+      lengthSelect.value = '2';
+    }
+  });
+
   container.append(heading, lengthLabel, lengthSelect, baseLabel, baseSelect);
 
   return container;
