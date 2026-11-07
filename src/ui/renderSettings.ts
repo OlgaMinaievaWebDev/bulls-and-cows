@@ -20,7 +20,31 @@ export function renderSettings(): HTMLElement {
 
   lengthSelect.value = '4';
 
-  container.append(heading, lengthLabel, lengthSelect);
+  const baseLabel = document.createElement('label');
+  baseLabel.textContent = 'Number system';
+  baseLabel.htmlFor = 'number-system';
+
+  const baseSelect = document.createElement('select');
+  baseSelect.id = 'number-system';
+  baseSelect.name = 'base';
+
+  const numberSystems = [
+    { label: 'Binary (bin)', value: 2 },
+    { label: 'Octal (oct)', value: 8 },
+    { label: 'Decimal (dec)', value: 10 },
+    { label: 'Hexadecimal (hex)', value: 16 },
+  ];
+
+  numberSystems.forEach(({ label, value }) => {
+    const option = document.createElement('option');
+    option.value = String(value);
+    option.textContent = label;
+    baseSelect.append(option);
+  });
+
+  baseSelect.value = '10';
+
+  container.append(heading, lengthLabel, lengthSelect, baseLabel, baseSelect);
 
   return container;
 }
