@@ -1,4 +1,11 @@
-export function renderSettings(): HTMLElement {
+export type GameSettings = {
+  length: number;
+  base: number;
+};
+
+export function renderSettings(
+  onStart: (settings: GameSettings) => void,
+): HTMLElement {
   const container = document.createElement('main');
   const heading = document.createElement('h1');
   heading.textContent = 'Bulls and Cows';
@@ -56,7 +63,24 @@ export function renderSettings(): HTMLElement {
     }
   });
 
-  container.append(heading, lengthLabel, lengthSelect, baseLabel, baseSelect);
+  const startButton = document.createElement('button');
+  startButton.type = 'button';
+  startButton.textContent = 'Start game';
+  startButton.addEventListener('click', () => {
+    onStart({
+      length: Number(lengthSelect.value),
+      base: Number(baseSelect.value),
+    });
+  });
+
+  container.append(
+    heading,
+    lengthLabel,
+    lengthSelect,
+    baseLabel,
+    baseSelect,
+    startButton,
+  );
 
   return container;
 }
